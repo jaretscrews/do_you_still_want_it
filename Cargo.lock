@@ -176,6 +176,7 @@ dependencies = [
  "lettre",
  "lettre_email",
  "reqwest",
+ "rusty-money",
  "scraper",
  "serde",
  "serde_json",
@@ -1359,6 +1360,37 @@ dependencies = [
  "wasm-bindgen-futures",
  "web-sys",
  "winreg",
+]
+
+[[package]]
+name = "rust_decimal"
+version = "1.8.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "c9e81662973c7a8d9663e64a0de4cd642b89a21d64966e3d99606efdc5fb0cc6"
+dependencies = [
+ "num-traits",
+ "serde",
+]
+
+[[package]]
+name = "rust_decimal_macros"
+version = "1.8.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "a5edf059b3f9aaceab5402cea5565ccc567aff559a519a9f180374528ae3a2db"
+dependencies = [
+ "quote",
+ "rust_decimal",
+]
+
+[[package]]
+name = "rusty-money"
+version = "0.3.5"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "e0d2c451494a3c0fd40c8007d611257692f61d5320f01772a0c982a37802a7de"
+dependencies = [
+ "lazy_static",
+ "rust_decimal",
+ "rust_decimal_macros",
 ]
 
 [[package]]
