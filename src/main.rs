@@ -58,4 +58,10 @@ fn main() {
 //        Err(err) => println!("failed to send email alert: {}", err)
 //    }
 
+    loop {
+        if wanted.has_check_passed() {
+            println!("The time has passed");
+            break;
+        }
+    }
 }
