@@ -27,8 +27,12 @@ fn main() {
         expect("Couldn't create the secret");
     println!("email: {}\npassword: {}", secret.email, secret.password);
 
-    let wanted: WantedThing = WantedThing::new("stuff".to_string(), "https://www.amazon.com".to_string(), Duration::seconds(2));
-    wanted.details();
+    let test_item: WantedThing = WantedThing::new(
+        "Watch Dogs Legion".to_string(), 
+        "https://www.amazon.com/Watch-Dogs-Legion-PlayStation-5-Standard/dp/B08FS6BB9N/ref=sr_1_2?dchild=1&keywords=ps5+game&qid=1608266021&sr=8-2".to_string(), 
+        Duration::seconds(2)
+    );
+    test_item.details();
 
     // Lettre setup and a simple test email
     // TODO change this to email actual information
@@ -58,4 +62,10 @@ fn main() {
 //        Err(err) => println!("failed to send email alert: {}", err)
 //    }
 
+    loop {
+        if test_item.has_check_passed() {
+            println!("The time has passed");
+            break;
+        }
+    }
 }
