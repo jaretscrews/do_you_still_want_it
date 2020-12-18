@@ -21,5 +21,6 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     );
 
     test_item.details();
+    test_item.check_url().await?;
     Ok(())
 }

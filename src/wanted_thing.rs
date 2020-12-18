@@ -1,9 +1,8 @@
-use std::collections::HashMap;
-
 use url::Url;
 use chrono::{DateTime, Duration};
 use chrono::offset::Utc;
 use reqwest;
+use scraper::{Html, Selector};
 
 pub struct WantedThing {
     name: String,
@@ -30,11 +29,13 @@ impl WantedThing {
     }
 
     pub async fn check_url(&self) -> Result<(), Box<dyn std::error::Error>> {
-        let resp = reqwest::get("https://httpbin.org/ip")
-            .await?
-            .json::<HashMap<String, String>>()
-            .await?;
-        println!("{:#?}", resp);
+        let body = reqwest::get(self.url.clone()).await?.text().await?;
+        let doc = Html::parse_document(&body);
+        let selector = Selector::parse("#priceblock_ourprice").unwrap(); 
+        for element in doc.select(&selector){
+            let price = element.text().collect::<Vec<_>>();
+            println!("{:?}", price);
+        }
         Ok(())
     }
 }
