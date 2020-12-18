@@ -1,6 +1,9 @@
+use std::collections::HashMap;
+
 use url::Url;
 use chrono::{DateTime, Duration};
 use chrono::offset::Utc;
+use reqwest;
 
 pub struct WantedThing {
     name: String,
@@ -24,5 +27,14 @@ impl WantedThing {
 
     pub fn has_check_passed(&self) -> bool {
         return Utc::now() > self.time_to_check;
+    }
+
+    pub async fn check_url(&self) -> Result<(), Box<dyn std::error::Error>> {
+        let resp = reqwest::get("https://httpbin.org/ip")
+            .await?
+            .json::<HashMap<String, String>>()
+            .await?;
+        println!("{:#?}", resp);
+        Ok(())
     }
 }
