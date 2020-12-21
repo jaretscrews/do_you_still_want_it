@@ -3,6 +3,9 @@ use chrono::Duration;
 pub mod wanted_thing;
 use wanted_thing::WantedThing;
 
+pub mod email_handler;
+use email_handler::EmailHandler;
+
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
@@ -13,5 +16,8 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     test_item.details();
     test_item.check_for_price_drop().await?;
+
+    let handler = EmailHandler::new();
+    handler.test_email();
     Ok(())
 }
