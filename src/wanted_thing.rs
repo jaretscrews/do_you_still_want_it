@@ -14,7 +14,6 @@ pub struct WantedThing {
 }
 
 //Pulls down the html to check to see if the price has changed
-//TODO move this into the struct
 async fn check_price(item_url: Url) -> Result<Money, Box<dyn std::error::Error>> {
     //Get the html
     let body = reqwest::get(item_url.clone()).await?.text().await?;
@@ -31,7 +30,6 @@ async fn check_price(item_url: Url) -> Result<Money, Box<dyn std::error::Error>>
     return Ok(Money::from_str("0.00", "USD").unwrap());
 }
 
-//TODO move this into the struct
 async fn get_thing_from_link(item_url: Url, duration: Duration) -> Result<WantedThing, Box<dyn std::error::Error>> {
     let mut name: String = "".to_string();
     let mut price: Money = Money::new(0, Currency::from_string("USD".to_string()).unwrap());
